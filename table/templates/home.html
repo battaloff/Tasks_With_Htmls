@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+<!-- NAVBAR CONTENT -->
+
+{% block navbar-content %}
+
+<i style="color: lightblue;" class="fas fa-user-alt"> </i> &nbsp;&nbsp; Журнал Вывода
+
+{% endblock navbar-content %}
+
+<!-- PAGE CONTENT -->
+{% block content %}
+
+<div class="container-fluid">
+    <br>
+
+    <table class=" table table-sm table-bordered table-striped table-hover" id="example" style="text-align: left;">
+        <thead class="table-info">
+                <tr>
+                    <th>ID</th>         <!-- 1  -->
+                    <th>Фирма</th>          <!-- 2  -->
+                    <th>Шт</th>         <!-- 3  -->
+                    <th>Название</th>           <!-- 4  -->
+                    <th>Размер</th>         <!-- 5  -->
+                    <th>Машина</th>         <!-- 6  -->
+                    <th>Дата</th>           <!-- 7  -->
+                    <th>Время</th>          <!-- 8  -->
+                    <th>Заметка</th>            <!-- 9  -->
+                    <th>Состояние</th>          <!-- 10  -->
+                    <th>Вывел</th>          <!-- 11  -->
+                    <th>Готовность</th>         <!-- 12  -->
+                    <th>Изменить</th>           <!-- 13  -->
+                    <th>Удалить</th>            <!-- 14  -->
+                </tr>
+        </thead>
+    <!--    DATA FROM BACKEND    -->
+
+        {% for task in task_list %}
+
+        <tr class="text-nowrap">
+
+            <td>{{ task.id }}</td>                          <!-- 1  -->
+            <td>{{ task.company_name }}</td>                        <!-- 2  -->
+            <td>{{ task.qty }}</td>                     <!-- 3  -->
+            <td>{{ task.file_name }}</td>                       <!-- 4  -->
+            <td>{{ task.plate_size }}</td>                      <!-- 5  -->
+            <td>{{ task.equipment }}</td>                       <!-- 6  -->
+            <td>{{ task.add_data }}</td>                        <!-- 7  -->
+            <td>{{ task.add_time }}</td>                        <!-- 8  -->
+            <td>{{ task.punch }}</td>                       <!-- 9  -->
+
+            {% if task.stage == 'UNREADY' %}
+            <td>В процессе</td>                     <!-- 10  -->
+            {% else %}
+            <td>Готов</td>
+            {% endif %}
+
+            <td>{{ task.operator }}</td>                        <!-- 11  -->
+            <td>{{ task.ready_datatime }}</td>                      <!-- 12  -->
+
+            <td><a class="btn btn-sm btn-success text-center" title="Изменить Задачу" href="">
+                <i class="fas fa-pen"></i>
+            </a></td>                        <!-- 13 -->
+
+            <td><a class="btn btn-sm btn-danger text-center" title="Удалить Задачу" href="">
+                <i class="fas fa-trash-alt"></i>
+            </a></td>                     <!-- 14  -->
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+</div>  <!-- END // CONTAINER -->
+
+<br><br><br><br>
+{% endblock content %}
